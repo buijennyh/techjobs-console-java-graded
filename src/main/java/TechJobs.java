@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -57,15 +55,29 @@ public class TechJobs {
                 // How does the user want to search (e.g. by skill or employer)
                 String searchField = getUserSelection("Search by:", columnChoices);
 
+
                 // What is their search term?
                 System.out.println("\nSearch term:");
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
                     printJobs(JobData.findByValue(searchTerm));
+
                 } else {
+                   /* ArrayList<String> results = new ArrayList<>(JobData.findAll(searchTerm));
+                    ArrayList<HashMap<String, String>> foundResults = JobData.findByValue(searchTerm);
+                    Map.Entry<String,String>*/
+
+
+                    // Print list of skills, employers, etc
+
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
+
+
+
+
+
             }
         }
     }
@@ -119,7 +131,16 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        for (HashMap<String, String> job : someJobs ) {
+            String jobInformation = "\n***** \n";
+            for (Map.Entry<String, String> column : job.entrySet()) {
+                jobInformation += column.getKey() + ": " + column.getValue() + '\n';
+            }
 
-        System.out.println("printJobs is not implemented yet");
+            jobInformation += "*****";
+            System.out.println(jobInformation);
+
+        }
+
     }
 }

@@ -5,13 +5,10 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
- * Created by LaunchCode
+ * Created by LaunchCodez
  */
 public class JobData {
 
@@ -79,7 +76,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
@@ -97,9 +94,20 @@ public class JobData {
 
         // load data, if not already loaded
         loadData();
+        ArrayList<HashMap<String, String>> jobListings = new ArrayList<>();
 
         // TODO - implement this method
-        return null;
+        for (HashMap<String, String> jobs : allJobs) {
+            for (String jobKey : jobs.keySet()) {
+                String aValue = jobs.get(jobKey);
+                if (aValue.toLowerCase().contains(value.toLowerCase())) {
+                    jobListings.add(jobs);
+                    break;
+                }
+            }
+        }
+
+        return jobListings;
     }
 
     /**
@@ -140,7 +148,10 @@ public class JobData {
         } catch (IOException e) {
             System.out.println("Failed to load job data");
             e.printStackTrace();
+
         }
+
+
     }
 
 }
