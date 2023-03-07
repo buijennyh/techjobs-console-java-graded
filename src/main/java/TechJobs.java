@@ -69,7 +69,7 @@ public class TechJobs {
                     Map.Entry<String,String>*/
 
 
-                    // Print list of skills, employers, etc
+                    // Print list of skills, employers, etc).
 
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
